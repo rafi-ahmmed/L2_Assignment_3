@@ -279,6 +279,7 @@ WHERE
     full_name ILIKE 'Tanvir%'
     OR full_name ILIKE '%Haque%';
 
+
 --= Query-3
 SELECT
     booking_id,
@@ -286,6 +287,53 @@ SELECT
     match_id,
     coalesce(payment_status, 'Action Required') AS systematic_status
 FROM
-    bookings
+    Bookings
 WHERE
     payment_status IS NULL;
+
+--= Query-4
+SELECT
+    booking_id,
+    full_name,
+    fixture,
+    total_cost
+FROM
+    Bookings
+    INNER JOIN users USING (user_id)
+    INNER JOIN matches USING (match_id);
+
+--= Query-5
+SELECT
+    user_id,
+    full_name,
+    booking_id
+FROM
+    Users
+    LEFT JOIN bookings USING (user_id);
+
+--= Query-6
+SELECT
+    booking_id,
+    match_id,
+    round(total_cost) AS total_cost
+FROM
+    Bookings
+WHERE
+    total_cost > (
+        SELECT
+            avg(total_cost)
+        FROM
+            bookings
+    );
+
+--= Query-7
+SELECT
+    *
+FROM
+    Matches
+ORDER BY
+    base_ticket_price DESC
+LIMIT
+    2
+OFFSET
+    1;
