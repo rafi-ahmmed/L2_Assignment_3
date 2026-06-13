@@ -263,7 +263,7 @@ SELECT
     fixture,
     round(base_ticket_price) AS base_ticket_price
 FROM
-    matches
+    Matches
 WHERE
     tournament_category = 'Champions League'
     AND match_status = 'Available';
@@ -274,11 +274,10 @@ SELECT
     full_name,
     email
 FROM
-    users
+    Users
 WHERE
     full_name ILIKE 'Tanvir%'
     OR full_name ILIKE '%Haque%';
-
 
 --= Query-3
 SELECT
