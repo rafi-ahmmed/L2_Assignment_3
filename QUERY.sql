@@ -1,8 +1,3 @@
--- =========================================================================
--- Football Ticket Booking System Database Design
--- =========================================================================
-
-
 -- Create table (Users)
 CREATE TABLE Users (
     user_id int PRIMARY KEY,
@@ -41,7 +36,8 @@ CREATE TABLE Bookings (
     CHECK (
         payment_status IN ('Pending', 'Confirmed', 'Cancelled', 'Refunded')
     )
-)
+);
+
 -- Data insert into user table
 INSERT INTO
     Users (user_id, full_name, email, role, phone_number)
@@ -245,17 +241,51 @@ INSERT INTO
     )
 VALUES
     (501, 1, 101, 'A-12', 'Confirmed', 150.00),
-    (502, 1, 102, 'B-04', 'Confirmed', 120.00),
+    (502, 1, 102, 'B-04', 'Pending', 120.00),
     (503, 2, 101, 'A-13', 'Confirmed', 150.00),
     (504, 2, 101, NULL, NULL, 150.00),
     (505, 3, 102, 'C-20', 'Pending', 120.00),
     (506, 4, 104, 'D-10', 'Refunded', 90.00),
-    (507, 5, 105, 'E-05', 'Confirmed', 80.00),
-    (508, 6, 106, 'F-01', 'Confirmed', 200.00),
+    (507, 5, 105, 'E-05', NULL, 80.00),
+    (508, 6, 106, 'F-01', 'Refunded', 200.00),
     (509, 7, 107, 'G-11', 'Pending', 180.00),
     (510, 8, 108, 'H-07', 'Confirmed', 170.00),
     (511, 9, 109, NULL, 'Cancelled', 160.00),
     (512, 10, 110, 'I-09', 'Confirmed', 140.00),
-    (513, 11, 101, 'A-15', 'Confirmed', 150.00),
-    (514, 12, 103, 'B-22', 'Pending', 130.00),
+    (513, 11, 101, 'A-15', 'Pending', 150.00),
+    (514, 12, 103, 'B-22', NULL, 130.00),
     (515, 13, 106, 'F-10', 'Confirmed', 200.00);
+
+-- Queries
+--= Query-1
+SELECT
+    match_id,
+    fixture,
+    round(base_ticket_price) AS base_ticket_price
+FROM
+    matches
+WHERE
+    tournament_category = 'Champions League'
+    AND match_status = 'Available';
+
+--= Query-2
+SELECT
+    user_id,
+    full_name,
+    email
+FROM
+    users
+WHERE
+    full_name ILIKE 'Tanvir%'
+    OR full_name ILIKE '%Haque%';
+
+--= Query-3
+SELECT
+    booking_id,
+    user_id,
+    match_id,
+    coalesce(payment_status, 'Action Required') AS systematic_status
+FROM
+    bookings
+WHERE
+    payment_status IS NULL;
