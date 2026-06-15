@@ -13,7 +13,7 @@ This project demonstrates:
 - Data integrity constraints
 - Sample data insertion
 - SQL querying techniques
-- Joins, Subqueries, Aggregation, Filtering, Sorting, and NULL handling
+- Joins, Subqueries, Aggregation, Filtering, Offset ,Limit ,Sorting, and NULL handling
 
 ---
 
@@ -37,7 +37,7 @@ This project demonstrates:
 
 ER Diagram Link:
 
-[[DB Design Link](https://drawsql.app/teams/rafi-ahmmed/diagrams/football-ticket-booking-system-database-design)]
+<!-- [DB Design Link (https://drawsql.app/teams/rafi-ahmmed/diagrams/football-ticket-booking-system-database-design)] -->
 
 Example:
 
@@ -86,7 +86,7 @@ Retrieve all booking records where the payment status is missing (NULL), replaci
 
 ### Query 4
 
-Query 4: Retrieve match booking details along with the User's full name and the scheduled Match fixture teams.
+Retrieve match booking details along with the User's full name and the scheduled Match fixture teams.
 
 ### Query 5
 
